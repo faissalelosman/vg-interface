@@ -69,7 +69,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"password123\"\n}"
+							"raw": "{\n  \"email\": \"test@vivaguest.me\",\n  \"password\": \"password123\"\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/user/login",
@@ -86,7 +86,7 @@
 								"login"
 							]
 						},
-						"description": "Login with username and password. Returns access token that is automatically saved to environment."
+						"description": "Login with email and password. Returns access token that is automatically saved to environment."
 					},
 					"response": []
 				},
