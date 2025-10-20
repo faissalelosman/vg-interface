@@ -434,6 +434,224 @@
 			]
 		},
 		{
+			"name": "Group Management",
+			"item": [
+				{
+					"name": "Create Group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.environment.set(\"groupId\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Test Group\",\n  \"description\": \"This is a test group\"\n}"
+						},
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/group",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"group"
+							]
+						},
+						"description": "Create a new group with tenantId, name, and optional description. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/group",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"group"
+							]
+						},
+						"description": "Get list of all groups with their tenant relationships. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Groups By Tenant",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/group?tenantId={{tenantId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"group"
+							],
+							"query": [
+								{
+									"key": "tenantId",
+									"value": "{{tenantId}}"
+								}
+							]
+						},
+						"description": "Get all groups belonging to a specific tenant. Uses tenantId from environment variable. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"group",
+								"{{groupId}}"
+							]
+						},
+						"description": "Get a specific group by ID with its tenant relationship. Uses groupId from environment variable. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Group Name\",\n  \"description\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"group",
+								"{{groupId}}"
+							]
+						},
+						"description": "Update group name and/or description. Uses groupId from environment variable. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Group",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"group",
+								"{{groupId}}"
+							]
+						},
+						"description": "Delete a group by ID. Uses groupId from environment variable. Requires authentication."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Health Check",
 			"item": [
 				{
