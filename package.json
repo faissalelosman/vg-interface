@@ -1,0 +1,17 @@
+{
+  "name": "vg-interface",
+  "version": "1.0.0",
+  "description": "Shared DTOs and interfaces for VG Monitoring Administration",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": ["vg", "monitoring", "dto", "interfaces"],
+  "author": "Faissal EL OSMAN",
+  "license": "ISC",
+  "peerDependencies": {
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.0"
+  }
+}
