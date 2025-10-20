@@ -652,6 +652,254 @@
 			]
 		},
 		{
+			"name": "User-Group Management",
+			"item": [
+				{
+					"name": "Assign User to Group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.environment.set(\"userGroupId\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"{{userId}}\",\n  \"groupId\": \"{{groupId}}\"\n}"
+						},
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/user-group",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"user-group"
+							]
+						},
+						"description": "Assign a user to a group. Creates a user-group relationship. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User-Group Assignments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/user-group",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"user-group"
+							]
+						},
+						"description": "Get all user-group assignments with user and group details. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Groups By User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/user-group?userId={{userId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"user-group"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						},
+						"description": "Get all groups that a specific user belongs to. Uses userId from environment variable. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users By Group",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/user-group?groupId={{groupId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"user-group"
+							],
+							"query": [
+								{
+									"key": "groupId",
+									"value": "{{groupId}}"
+								}
+							]
+						},
+						"description": "Get all users that belong to a specific group. Uses groupId from environment variable. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User-Group Assignment By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/user-group/{{userGroupId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"user-group",
+								"{{userGroupId}}"
+							]
+						},
+						"description": "Get a specific user-group assignment by ID. Uses userGroupId from environment variable. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User-Group Assignment By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/user-group/{{userGroupId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"user-group",
+								"{{userGroupId}}"
+							]
+						},
+						"description": "Remove a user-group assignment by assignment ID. Uses userGroupId from environment variable. Requires authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User From Group",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/monitoring/user-group/user/{{userId}}/group/{{groupId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"monitoring",
+								"user-group",
+								"user",
+								"{{userId}}",
+								"group",
+								"{{groupId}}"
+							]
+						},
+						"description": "Remove a user from a group by userId and groupId. Uses environment variables. Requires authentication."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Health Check",
 			"item": [
 				{

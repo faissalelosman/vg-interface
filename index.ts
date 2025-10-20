@@ -10,3 +10,6 @@ export * from './dto/tenant/update-status.dto';
 // Group DTOs
 export * from './dto/group/create-group.dto';
 export * from './dto/group/update-group.dto';
+
+// User-Group DTOs
+export * from './dto/user-group/create-user-group.dto';
