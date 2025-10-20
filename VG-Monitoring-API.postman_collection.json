@@ -94,7 +94,13 @@
 					"name": "Get All Users",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/user",
 							"protocol": "https",
@@ -109,7 +115,7 @@
 								"user"
 							]
 						},
-						"description": "Get list of all users (without passwords)"
+						"description": "Get list of all users (without passwords). Requires authentication."
 					},
 					"response": []
 				},
@@ -117,7 +123,13 @@
 					"name": "Get User By ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/user/{{userId}}",
 							"protocol": "https",
@@ -133,7 +145,7 @@
 								"{{userId}}"
 							]
 						},
-						"description": "Get a specific user by ID. Uses userId from environment variable (set after login)."
+						"description": "Get a specific user by ID. Uses userId from environment variable (set after login). Requires authentication."
 					},
 					"response": []
 				},
@@ -171,7 +183,13 @@
 					"name": "Delete User",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/user/{{userId}}",
 							"protocol": "https",
@@ -187,7 +205,7 @@
 								"{{userId}}"
 							]
 						},
-						"description": "Delete a user by ID. Uses userId from environment variable."
+						"description": "Delete a user by ID. Uses userId from environment variable. Requires authentication."
 					},
 					"response": []
 				}
