@@ -240,7 +240,7 @@
 								"{{userId}}"
 							]
 						},
-						"description": "Delete a user by ID. Uses userId from environment variable. Requires authentication."
+						"description": "Delete a user by ID. Uses userId from environment variable. Requires authentication. Note: Superadmin users (users belonging to SUPER_TENANT) cannot be deleted and will return a 403 Forbidden error."
 					},
 					"response": []
 				}
@@ -280,7 +280,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\"\n}"
+							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"adminEmail\": \"admin@test-tenant.com\"\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/tenant",
@@ -296,7 +296,7 @@
 								"tenant"
 							]
 						},
-						"description": "Create a new tenant with name and unique slug. All created tenants default to NORMAL type. Only VivaGuest (created via seeding) is SUPER_TENANT."
+						"description": "Create a new tenant with name, unique slug, and admin email. For NORMAL tenants, this automatically creates: 1) Two default groups (administrators, standard users), 2) An admin user with the provided email and password 'password123', 3) Assigns the admin user to the administrators group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted."
 					},
 					"response": []
 				},
@@ -462,7 +462,7 @@
 								"{{tenantId}}"
 							]
 						},
-						"description": "Delete a tenant by ID. Uses tenantId from environment variable."
+						"description": "Delete a tenant by ID. Uses tenantId from environment variable. Note: SUPER_TENANT cannot be deleted and will return a 403 Forbidden error."
 					},
 					"response": []
 				}

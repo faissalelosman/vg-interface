@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength, IsEmail } from 'class-validator';
 
 export class CreateTenantDto {
   @IsNotEmpty()
@@ -10,4 +10,8 @@ export class CreateTenantDto {
   @IsString()
   @MaxLength(100)
   slug: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  adminEmail: string;
 }
