@@ -1,9 +1,13 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MinLength, IsUUID, IsOptional } from 'class-validator';
 
 export class CreateUserDto {
-  @IsNotEmpty()
+  @IsOptional()
+  @IsUUID()
+  tenantId?: string;
+
+  @IsOptional()
   @IsString()
-  username: string;
+  name?: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -13,4 +17,9 @@ export class CreateUserDto {
   @IsString()
   @MinLength(6)
   password: string;
+
+  // Keep for backward compatibility
+  @IsOptional()
+  @IsString()
+  username?: string;
 }
