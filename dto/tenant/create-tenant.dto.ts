@@ -14,4 +14,9 @@ export class CreateTenantDto {
   @IsNotEmpty()
   @IsEmail()
   adminEmail: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(255)
+  adminName: string;
 }

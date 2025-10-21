@@ -280,7 +280,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"adminEmail\": \"admin@test-tenant.com\"\n}"
+							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"adminEmail\": \"admin@test-tenant.com\",\n  \"adminName\": \"John Doe\"\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/tenant",
@@ -296,7 +296,7 @@
 								"tenant"
 							]
 						},
-						"description": "Create a new tenant with name, unique slug, and admin email. For NORMAL tenants, this automatically creates: 1) Two default groups ('admin', 'user'), 2) An admin user with the provided email and password 'password123', 3) Assigns the admin user to the 'admin' group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted. System groups (super_admin, admin, user) cannot be deleted."
+						"description": "Create a new tenant with name, unique slug, admin email, and admin name. For NORMAL tenants, this automatically creates: 1) Two default groups ('admin', 'user'), 2) An admin user with the provided email, name and password 'password123', 3) Assigns the admin user to the 'admin' group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted. System groups (super_admin, admin, user) cannot be deleted."
 					},
 					"response": []
 				},
