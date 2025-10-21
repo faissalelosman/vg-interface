@@ -280,7 +280,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"type\": \"NORMAL\"\n}"
+							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\"\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/tenant",
@@ -296,7 +296,7 @@
 								"tenant"
 							]
 						},
-						"description": "Create a new tenant with name and unique slug"
+						"description": "Create a new tenant with name and unique slug. All created tenants default to NORMAL type. Only VivaGuest (created via seeding) is SUPER_TENANT."
 					},
 					"response": []
 				},
