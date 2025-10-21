@@ -935,6 +935,212 @@
 			]
 		},
 		{
+			"name": "WhatsApp Config Management",
+			"item": [
+				{
+					"name": "Create WhatsApp Config",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.environment.set(\"whatsappConfigId\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"phoneNumberId\": \"123456789012345\",\n  \"whatsappAccountId\": \"987654321098765\",\n  \"accessToken\": \"EAAB...\",\n  \"isConnected\": false,\n  \"isEnabled\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config"
+							]
+						},
+						"description": "Create a new WhatsApp configuration for a tenant. Required fields: tenantId (UUID), phoneNumberId (max 255 chars), whatsappAccountId (max 255 chars), accessToken. Optional fields: isConnected (default: false), isEnabled (default: false). Unique constraints on tenantId and phoneNumberId."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All WhatsApp Configs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config"
+							]
+						},
+						"description": "Get list of all WhatsApp configurations."
+					},
+					"response": []
+				},
+				{
+					"name": "Get WhatsApp Config By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config",
+								"{{whatsappConfigId}}"
+							]
+						},
+						"description": "Get a specific WhatsApp configuration by ID. Uses whatsappConfigId from environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Get WhatsApp Config By Tenant ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config/tenant/{{tenantId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config",
+								"tenant",
+								"{{tenantId}}"
+							]
+						},
+						"description": "Get WhatsApp configuration for a specific tenant. Uses tenantId from environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Update WhatsApp Config",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phoneNumberId\": \"123456789012345\",\n  \"whatsappAccountId\": \"987654321098765\",\n  \"accessToken\": \"EAAB...\",\n  \"isConnected\": true,\n  \"isEnabled\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config",
+								"{{whatsappConfigId}}"
+							]
+						},
+						"description": "Update WhatsApp configuration. All fields are optional: phoneNumberId, whatsappAccountId, accessToken, isConnected, isEnabled. Uses whatsappConfigId from environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Connection Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}/toggle-connection",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config",
+								"{{whatsappConfigId}}",
+								"toggle-connection"
+							]
+						},
+						"description": "Toggle the isConnected status of a WhatsApp configuration. Uses whatsappConfigId from environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Enabled Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}/toggle-enabled",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config",
+								"{{whatsappConfigId}}",
+								"toggle-enabled"
+							]
+						},
+						"description": "Toggle the isEnabled status of a WhatsApp configuration. Uses whatsappConfigId from environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete WhatsApp Config",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"whatsapp-config",
+								"{{whatsappConfigId}}"
+							]
+						},
+						"description": "Delete a WhatsApp configuration by ID. Uses whatsappConfigId from environment variable."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Health Check",
 			"item": [
 				{
