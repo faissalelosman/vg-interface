@@ -1,4 +1,4 @@
-import { IsUUID, IsString, IsBoolean, IsNotEmpty, MaxLength, IsOptional } from 'class-validator';
+import { IsUUID, IsString, IsNotEmpty, MaxLength } from 'class-validator';
 
 export class CreateWhatsappConfigDto {
   @IsUUID()
@@ -18,12 +18,4 @@ export class CreateWhatsappConfigDto {
   @IsString()
   @IsNotEmpty()
   accessToken: string;
-
-  @IsBoolean()
-  @IsOptional()
-  isConnected?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
-  isEnabled?: boolean;
 }
