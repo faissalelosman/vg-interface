@@ -957,13 +957,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}",
-							"protocol": "http",
+							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"app",
+								"vivaguest",
+								"me"
 							],
-							"port": "3002",
 							"path": [
+								"api",
+								"whatsapp",
 								"whatsapp-config",
 								"{{whatsappConfigId}}"
 							]
@@ -978,13 +981,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/whatsapp-config/tenant/{{tenantId}}",
-							"protocol": "http",
+							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/tenant/{{tenantId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"app",
+								"vivaguest",
+								"me"
 							],
-							"port": "3002",
 							"path": [
+								"api",
+								"whatsapp",
 								"whatsapp-config",
 								"tenant",
 								"{{tenantId}}"
@@ -1009,13 +1015,16 @@
 							"raw": "{\n  \"phoneNumberId\": \"123456789012345\",\n  \"whatsappAccountId\": \"987654321098765\",\n  \"accessToken\": \"EAAB...\",\n  \"isEnabled\": true\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}",
-							"protocol": "http",
+							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"app",
+								"vivaguest",
+								"me"
 							],
-							"port": "3002",
 							"path": [
+								"api",
+								"whatsapp",
 								"whatsapp-config",
 								"{{whatsappConfigId}}"
 							]
@@ -1030,13 +1039,16 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/whatsapp-config/{{whatsappConfigId}}/toggle-enabled",
-							"protocol": "http",
+							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}/toggle-enabled",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"app",
+								"vivaguest",
+								"me"
 							],
-							"port": "3002",
 							"path": [
+								"api",
+								"whatsapp",
 								"whatsapp-config",
 								"{{whatsappConfigId}}",
 								"toggle-enabled"
