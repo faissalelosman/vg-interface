@@ -1,4 +1,4 @@
-import { IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsOptional, IsString, MaxLength, IsIn } from 'class-validator';
 
 export class UpdateTenantDto {
   @IsOptional()
@@ -10,4 +10,9 @@ export class UpdateTenantDto {
   @IsString()
   @MaxLength(100)
   slug?: string;
+
+  @IsOptional()
+  @IsString()
+  @IsIn(['SUPER_TENANT', 'NORMAL'])
+  type?: string;
 }

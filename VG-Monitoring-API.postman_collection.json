@@ -280,7 +280,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\"\n}"
+							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"type\": \"NORMAL\"\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/tenant",
@@ -376,7 +376,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Updated Tenant Name\",\n  \"slug\": \"updated-slug\"\n}"
+							"raw": "{\n  \"name\": \"Updated Tenant Name\",\n  \"slug\": \"updated-slug\",\n  \"type\": \"NORMAL\"\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
