@@ -955,7 +955,13 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}",
 							"protocol": "https",
@@ -979,7 +985,13 @@
 					"name": "Get WhatsApp Config By Tenant ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/tenant/{{tenantId}}",
 							"protocol": "https",
@@ -1005,6 +1017,11 @@
 					"request": {
 						"method": "PATCH",
 						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
 							{
 								"key": "Content-Type",
 								"value": "application/json"
@@ -1037,7 +1054,13 @@
 					"name": "Toggle Enabled Status",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}/toggle-enabled",
 							"protocol": "https",
