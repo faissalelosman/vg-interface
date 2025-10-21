@@ -17,3 +17,6 @@ export * from './dto/user-group/create-user-group.dto';
 // WhatsApp Config DTOs
 export * from './dto/whatsapp-config/create-whatsapp-config.dto';
 export * from './dto/whatsapp-config/update-whatsapp-config.dto';
+
+// Shared Entities
+export * from './entities/user.entity';
