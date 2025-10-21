@@ -280,7 +280,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"adminEmail\": \"admin@test-tenant.com\",\n  \"adminName\": \"John Doe\"\n}"
+							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"adminEmail\": \"admin@test-tenant.com\",\n  \"adminName\": \"John Doe\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"123 Main St, City, Country\",\n  \"gateway_type\": \"MS Teams\",\n  \"reservation_import_enabled\": false,\n  \"guest_feedback_enabled\": false,\n  \"ai_enabled\": false\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/tenant",
@@ -296,7 +296,7 @@
 								"tenant"
 							]
 						},
-						"description": "Create a new tenant with name, unique slug, admin email, and admin name. For NORMAL tenants, this automatically creates: 1) Two default groups ('admin', 'user'), 2) An admin user with the provided email, name and password 'password123', 3) Assigns the admin user to the 'admin' group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted. System groups (super_admin, admin, user) cannot be deleted."
+						"description": "Create a new tenant with name, unique slug, admin email, and admin name. Optional fields: phone, address, gateway_type ('MS Teams' or 'Slack'), reservation_import_enabled (default: false), guest_feedback_enabled (default: false), ai_enabled (default: false). For NORMAL tenants, this automatically creates: 1) Two default groups ('admin', 'user'), 2) An admin user with the provided email, name and password 'password123', 3) Assigns the admin user to the 'admin' group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted. System groups (super_admin, admin, user) cannot be deleted."
 					},
 					"response": []
 				},
@@ -376,7 +376,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Updated Tenant Name\",\n  \"slug\": \"updated-slug\",\n  \"type\": \"NORMAL\"\n}"
+							"raw": "{\n  \"name\": \"Updated Tenant Name\",\n  \"slug\": \"updated-slug\",\n  \"type\": \"NORMAL\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"456 New Address, City, Country\",\n  \"gateway_type\": \"Slack\",\n  \"reservation_import_enabled\": true,\n  \"guest_feedback_enabled\": true,\n  \"ai_enabled\": true\n}"
 						},
 						"url": {
 							"raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
