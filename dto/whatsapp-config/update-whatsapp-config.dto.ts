@@ -17,9 +17,5 @@ export class UpdateWhatsappConfigDto {
 
   @IsBoolean()
   @IsOptional()
-  isConnected?: boolean;
-
-  @IsBoolean()
-  @IsOptional()
   isEnabled?: boolean;
 }
