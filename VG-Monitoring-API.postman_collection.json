@@ -296,7 +296,7 @@
 								"tenant"
 							]
 						},
-						"description": "Create a new tenant with name, unique slug, and admin email. For NORMAL tenants, this automatically creates: 1) Two default groups (administrators, standard users), 2) An admin user with the provided email and password 'password123', 3) Assigns the admin user to the administrators group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted."
+						"description": "Create a new tenant with name, unique slug, and admin email. For NORMAL tenants, this automatically creates: 1) Two default groups ('admin', 'user'), 2) An admin user with the provided email and password 'password123', 3) Assigns the admin user to the 'admin' group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted. System groups (super_administrator, admin, user) cannot be deleted."
 					},
 					"response": []
 				},
@@ -680,7 +680,7 @@
 								"{{groupId}}"
 							]
 						},
-						"description": "Delete a group by ID. Uses groupId from environment variable. Requires authentication."
+						"description": "Delete a group by ID. Uses groupId from environment variable. Requires authentication. Note: System groups (super_administrator, admin, user) cannot be deleted and will return a 403 Forbidden error."
 					},
 					"response": []
 				}
