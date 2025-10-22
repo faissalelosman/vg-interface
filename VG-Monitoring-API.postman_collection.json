@@ -953,7 +953,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenant_id}}",
+              "raw": "https://app.vivaguest.me/api/open-ai/config/tenant/{{tenant_id}}",
               "protocol": "https",
               "host": [
                 "app",
@@ -963,6 +963,7 @@
               "path": [
                 "api",
                 "open-ai",
+                "config",
                 "tenant",
                 "{{tenant_id}}"
               ]
@@ -995,7 +996,7 @@
               "raw": "{\n  \"assistantId\": \"asst_abc123\",\n  \"apiKey\": \"sk-proj-...\",\n  \"isEnabled\": true\n}"
             },
             "url": {
-              "raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenant_id}}",
+              "raw": "https://app.vivaguest.me/api/open-ai/config/tenant/{{tenant_id}}",
               "protocol": "https",
               "host": [
                 "app",
@@ -1005,6 +1006,7 @@
               "path": [
                 "api",
                 "open-ai",
+                "config",
                 "tenant",
                 "{{tenant_id}}"
               ]
@@ -1028,7 +1030,7 @@
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenant_id}}/toggle-enabled",
+              "raw": "https://app.vivaguest.me/api/open-ai/config/tenant/{{tenant_id}}/toggle-enabled",
               "protocol": "https",
               "host": [
                 "app",
@@ -1038,6 +1040,7 @@
               "path": [
                 "api",
                 "open-ai",
+                "config",
                 "tenant",
                 "{{tenant_id}}",
                 "toggle-enabled"
