@@ -987,20 +987,18 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/openai-config/tenant/:tenantId",
+              "raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenant_id}}",
+              "protocol": "https",
               "host": [
-                "{{base_url}}"
+                "app",
+                "vivaguest",
+                "me"
               ],
               "path": [
-                "openai-config",
+                "api",
+                "open-ai",
                 "tenant",
-                ":tenantId"
-              ],
-              "variable": [
-                {
-                  "key": "tenantId",
-                  "value": "{{tenant_id}}"
-                }
+                "{{tenant_id}}"
               ]
             }
           },
@@ -1031,19 +1029,18 @@
               "raw": "{\n  \"assistantId\": \"asst_abc123\",\n  \"apiKey\": \"sk-proj-...\",\n  \"isEnabled\": true\n}"
             },
             "url": {
-              "raw": "{{base_url}}/openai-config/:id",
+              "raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenant_id}}",
+              "protocol": "https",
               "host": [
-                "{{base_url}}"
+                "app",
+                "vivaguest",
+                "me"
               ],
               "path": [
-                "openai-config",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "{{openai_config_id}}"
-                }
+                "api",
+                "open-ai",
+                "tenant",
+                "{{tenant_id}}"
               ]
             }
           },
@@ -1065,20 +1062,19 @@
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/openai-config/:id/toggle-enabled",
+              "raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenant_id}}/toggle-enabled",
+              "protocol": "https",
               "host": [
-                "{{base_url}}"
+                "app",
+                "vivaguest",
+                "me"
               ],
               "path": [
-                "openai-config",
-                ":id",
+                "api",
+                "open-ai",
+                "tenant",
+                "{{tenant_id}}",
                 "toggle-enabled"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "{{openai_config_id}}"
-                }
               ]
             }
           },
