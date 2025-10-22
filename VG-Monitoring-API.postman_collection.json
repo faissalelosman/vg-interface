@@ -953,11 +953,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/openai-config/:id",
+              "raw": "{{base_url}}/api/monitoring/openai-config/:id",
               "host": [
                 "{{base_url}}"
               ],
               "path": [
+                "api",
+                "monitoring",
                 "openai-config",
                 ":id"
               ],
@@ -992,6 +994,8 @@
                 "{{base_url}}"
               ],
               "path": [
+                "api",
+                "monitoring",
                 "openai-config",
                 "tenant",
                 ":tenantId"
@@ -1031,11 +1035,13 @@
               "raw": "{\n  \"assistantId\": \"asst_abc123\",\n  \"apiKey\": \"sk-proj-...\",\n  \"isEnabled\": true\n}"
             },
             "url": {
-              "raw": "{{base_url}}/openai-config/:id",
+              "raw": "{{base_url}}/api/monitoring/openai-config/:id",
               "host": [
                 "{{base_url}}"
               ],
               "path": [
+                "api",
+                "monitoring",
                 "openai-config",
                 ":id"
               ],
@@ -1065,11 +1071,13 @@
             "method": "PATCH",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/openai-config/:id/toggle-enabled",
+              "raw": "{{base_url}}/api/monitoring/openai-config/:id/toggle-enabled",
               "host": [
                 "{{base_url}}"
               ],
               "path": [
+                "api",
+                "monitoring",
                 "openai-config",
                 ":id",
                 "toggle-enabled"
