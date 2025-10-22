@@ -1,1121 +1,1124 @@
 {
-	"info": {
-		"_postman_id": "vg-monitoring-collection",
-		"name": "VG Monitoring Administration API",
-		"description": "API collection for VivaGuest Monitoring Administration microservice",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "User Management",
-			"item": [
-				{
-					"name": "Register User",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Test User\",\n  \"email\": \"test@vivaguest.me\",\n  \"password\": \"password123\"\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user/register",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user",
-								"register"
-							]
-						},
-						"description": "Register a new user with tenantId, name, email, and password (min 6 characters). Unique constraint on (tenantId, email)."
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"if (jsonData.accessToken) {",
-									"    pm.environment.set(\"accessToken\", jsonData.accessToken);",
-									"    pm.environment.set(\"userId\", jsonData.user.id);",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"email\": \"engineering@vivaguest.com\",\n  \"password\": \"admin123\"\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user/login",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user",
-								"login"
-							]
-						},
-						"description": "Login with email and password. Returns access token that is automatically saved to environment."
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Users",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user"
-							]
-						},
-						"description": "Get list of all users with tenant information (without passwords). Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Users By Tenant",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user?tenantId={{tenantId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user"
-							],
-							"query": [
-								{
-									"key": "tenantId",
-									"value": "{{tenantId}}"
-								}
-							]
-						},
-						"description": "Get all users belonging to a specific tenant. Uses tenantId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get User By ID",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user/{{userId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user",
-								"{{userId}}"
-							]
-						},
-						"description": "Get a specific user by ID. Uses userId from environment variable (set after login). Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Logout",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user/logout",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user",
-								"logout"
-							]
-						},
-						"description": "Logout and invalidate the current session token. Uses accessToken from environment variable."
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user/{{userId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user",
-								"{{userId}}"
-							]
-						},
-						"description": "Delete a user by ID. Uses userId from environment variable. Requires authentication. Note: Superadmin users (users belonging to SUPER_TENANT) cannot be deleted and will return a 403 Forbidden error."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Tenant Management",
-			"item": [
-				{
-					"name": "Create Tenant",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"if (jsonData.id) {",
-									"    pm.environment.set(\"tenantId\", jsonData.id);",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"adminEmail\": \"admin@test-tenant.com\",\n  \"adminName\": \"John Doe\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"123 Main St, City, Country\",\n  \"gateway_type\": \"MS Teams\",\n  \"reservation_import_enabled\": false,\n  \"guest_feedback_enabled\": false,\n  \"ai_enabled\": false\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/tenant",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"tenant"
-							]
-						},
-						"description": "Create a new tenant with name, unique slug, admin email, and admin name. Optional fields: phone, address, gateway_type ('MS Teams' or 'Slack'), reservation_import_enabled (default: false), guest_feedback_enabled (default: false), ai_enabled (default: false). For NORMAL tenants, this automatically creates: 1) Two default groups ('admin', 'user'), 2) An admin user with the provided email, name and password 'password123', 3) Assigns the admin user to the 'admin' group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted. System groups (super_admin, admin, user) cannot be deleted."
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Tenants",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/tenant",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"tenant"
-							]
-						},
-						"description": "Get list of all tenants (ordered by created_at DESC)"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Tenant By ID",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"tenant",
-								"{{tenantId}}"
-							]
-						},
-						"description": "Get a specific tenant by ID. Uses tenantId from environment variable."
-					},
-					"response": []
-				},
-				{
-					"name": "Update Tenant",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Updated Tenant Name\",\n  \"slug\": \"updated-slug\",\n  \"type\": \"NORMAL\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"456 New Address, City, Country\",\n  \"gateway_type\": \"Slack\",\n  \"reservation_import_enabled\": true,\n  \"guest_feedback_enabled\": true,\n  \"ai_enabled\": true\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"tenant",
-								"{{tenantId}}"
-							]
-						},
-						"description": "Update tenant name and/or slug. Uses tenantId from environment variable."
-					},
-					"response": []
-				},
-				{
-					"name": "Update Tenant Status",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"on hold\"\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}/status",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"tenant",
-								"{{tenantId}}",
-								"status"
-							]
-						},
-						"description": "Change tenant status to 'active' or 'on hold'. Uses tenantId from environment variable."
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Tenant",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"tenant",
-								"{{tenantId}}"
-							]
-						},
-						"description": "Delete a tenant by ID. Uses tenantId from environment variable. Note: SUPER_TENANT cannot be deleted and will return a 403 Forbidden error."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Group Management",
-			"item": [
-				{
-					"name": "Create Group",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"if (jsonData.id) {",
-									"    pm.environment.set(\"groupId\", jsonData.id);",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Test Group\",\n  \"description\": \"This is a test group\"\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/group",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"group"
-							]
-						},
-						"description": "Create a new group with tenantId, name, and optional description. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Groups",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/group",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"group"
-							]
-						},
-						"description": "Get list of all groups with their tenant relationships. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Groups By Tenant",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/group?tenantId={{tenantId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"group"
-							],
-							"query": [
-								{
-									"key": "tenantId",
-									"value": "{{tenantId}}"
-								}
-							]
-						},
-						"description": "Get all groups belonging to a specific tenant. Uses tenantId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Group By ID",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"group",
-								"{{groupId}}"
-							]
-						},
-						"description": "Get a specific group by ID with its tenant relationship. Uses groupId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Update Group",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Updated Group Name\",\n  \"description\": \"Updated description\"\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"group",
-								"{{groupId}}"
-							]
-						},
-						"description": "Update group name and/or description. Uses groupId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Group",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"group",
-								"{{groupId}}"
-							]
-						},
-						"description": "Delete a group by ID. Uses groupId from environment variable. Requires authentication. Note: System groups (super_admin, admin, user) cannot be deleted and will return a 403 Forbidden error."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User-Group Management",
-			"item": [
-				{
-					"name": "Assign User to Group",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"if (jsonData.id) {",
-									"    pm.environment.set(\"userGroupId\", jsonData.id);",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"userId\": \"{{userId}}\",\n  \"groupId\": \"{{groupId}}\"\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user-group",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user-group"
-							]
-						},
-						"description": "Assign a user to a group. Creates a user-group relationship. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get All User-Group Assignments",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user-group",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user-group"
-							]
-						},
-						"description": "Get all user-group assignments with user and group details. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Groups By User",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user-group?userId={{userId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user-group"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": "{{userId}}"
-								}
-							]
-						},
-						"description": "Get all groups that a specific user belongs to. Uses userId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get Users By Group",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user-group?groupId={{groupId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user-group"
-							],
-							"query": [
-								{
-									"key": "groupId",
-									"value": "{{groupId}}"
-								}
-							]
-						},
-						"description": "Get all users that belong to a specific group. Uses groupId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Get User-Group Assignment By ID",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user-group/{{userGroupId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user-group",
-								"{{userGroupId}}"
-							]
-						},
-						"description": "Get a specific user-group assignment by ID. Uses userGroupId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Remove User-Group Assignment By ID",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user-group/{{userGroupId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user-group",
-								"{{userGroupId}}"
-							]
-						},
-						"description": "Remove a user-group assignment by assignment ID. Uses userGroupId from environment variable. Requires authentication."
-					},
-					"response": []
-				},
-				{
-					"name": "Remove User From Group",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring/user-group/user/{{userId}}/group/{{groupId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring",
-								"user-group",
-								"user",
-								"{{userId}}",
-								"group",
-								"{{groupId}}"
-							]
-						},
-						"description": "Remove a user from a group by userId and groupId. Uses environment variables. Requires authentication."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "WhatsApp Config Management",
-			"item": [
-				{
-					"name": "Get WhatsApp Config By ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"if (jsonData.id) {",
-									"    pm.environment.set(\"whatsappConfigId\", jsonData.id);",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"whatsapp",
-								"whatsapp-config",
-								"{{whatsappConfigId}}"
-							]
-						},
-						"description": "Get a specific WhatsApp configuration by ID. Uses whatsappConfigId from environment variable."
-					},
-					"response": []
-				},
-				{
-					"name": "Get WhatsApp Config By Tenant ID",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/tenant/{{tenantId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"whatsapp",
-								"whatsapp-config",
-								"tenant",
-								"{{tenantId}}"
-							]
-						},
-						"description": "Get WhatsApp configuration for a specific tenant. Uses tenantId from environment variable. Note: WhatsApp config is automatically created when a tenant is created in vg-monitoring-administration."
-					},
-					"response": []
-				},
-				{
-					"name": "Update WhatsApp Config",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"phoneNumberId\": \"123456789012345\",\n  \"whatsappAccountId\": \"987654321098765\",\n  \"accessToken\": \"EAAB...\",\n  \"isEnabled\": true\n}"
-						},
-						"url": {
-							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"whatsapp",
-								"whatsapp-config",
-								"{{whatsappConfigId}}"
-							]
-						},
-						"description": "Update WhatsApp configuration. All fields are optional: phoneNumberId, whatsappAccountId, accessToken, isEnabled. Uses whatsappConfigId from environment variable."
-					},
-					"response": []
-				},
-				{
-					"name": "Toggle Enabled Status",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/whatsapp/whatsapp-config/{{whatsappConfigId}}/toggle-enabled",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"whatsapp",
-								"whatsapp-config",
-								"{{whatsappConfigId}}",
-								"toggle-enabled"
-							]
-						},
-						"description": "Toggle the isEnabled status of a WhatsApp configuration. Uses whatsappConfigId from environment variable."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Health Check",
-			"item": [
-				{
-					"name": "Hello World",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://app.vivaguest.me/api/monitoring",
-							"protocol": "https",
-							"host": [
-								"app",
-								"vivaguest",
-								"me"
-							],
-							"path": [
-								"api",
-								"monitoring"
-							]
-						},
-						"description": "Basic health check endpoint"
-					},
-					"response": []
-				}
-			]
-		}
-	],
-	"variable": [
-		{
-			"key": "baseUrl",
-			"value": "https://app.vivaguest.me/api/monitoring",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "vg-monitoring-collection",
+    "name": "VG Monitoring Administration API",
+    "description": "API collection for VivaGuest Monitoring Administration microservice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Test User\",\n  \"email\": \"test@vivaguest.me\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/register",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "register"
+              ]
+            },
+            "description": "Register a new user with tenantId, name, email, and password (min 6 characters). Unique constraint on (tenantId, email)."
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.accessToken) {",
+                  "    pm.environment.set(\"accessToken\", jsonData.accessToken);",
+                  "    pm.environment.set(\"userId\", jsonData.user.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@vivaguest.me\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/login",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "login"
+              ]
+            },
+            "description": "Login with email and password. Returns access token that is automatically saved to environment."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user"
+              ]
+            },
+            "description": "Get list of all users with tenant information (without passwords). Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users By Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user?tenantId={{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user"
+              ],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            },
+            "description": "Get all users belonging to a specific tenant. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/{{userId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "{{userId}}"
+              ]
+            },
+            "description": "Get a specific user by ID. Uses userId from environment variable (set after login). Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/logout",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "logout"
+              ]
+            },
+            "description": "Logout and invalidate the current session token. Uses accessToken from environment variable."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/{{userId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "{{userId}}"
+              ]
+            },
+            "description": "Delete a user by ID. Uses userId from environment variable. Requires authentication. Note: Superadmin users (users belonging to SUPER_TENANT) cannot be deleted and will return a 403 Forbidden error."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tenant Management",
+      "item": [
+        {
+          "name": "Create Tenant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"tenantId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Tenant\",\n  \"slug\": \"test-tenant\",\n  \"adminEmail\": \"admin@test-tenant.com\",\n  \"adminName\": \"John Doe\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"123 Main St, City, Country\",\n  \"gateway_type\": \"MS Teams\",\n  \"reservation_import_enabled\": false,\n  \"guest_feedback_enabled\": false,\n  \"ai_enabled\": false\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/tenant",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "tenant"
+              ]
+            },
+            "description": "Create a new tenant with name, unique slug, admin email, and admin name. Optional fields: phone, address, gateway_type ('MS Teams' or 'Slack'), reservation_import_enabled (default: false), guest_feedback_enabled (default: false), ai_enabled (default: false). For NORMAL tenants, this automatically creates: 1) Two default groups ('admin', 'user'), 2) An admin user with the provided email, name and password 'password123', 3) Assigns the admin user to the 'admin' group. SUPER_TENANT cannot be deleted, and superadmin users cannot be deleted. System groups (super_admin, admin, user) cannot be deleted."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Tenants",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/tenant",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "tenant"
+              ]
+            },
+            "description": "Get list of all tenants (ordered by created_at DESC)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Tenant By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Get a specific tenant by ID. Uses tenantId from environment variable."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Tenant",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Tenant Name\",\n  \"slug\": \"updated-slug\",\n  \"type\": \"NORMAL\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"456 New Address, City, Country\",\n  \"gateway_type\": \"Slack\",\n  \"reservation_import_enabled\": true,\n  \"guest_feedback_enabled\": true,\n  \"ai_enabled\": true\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Update tenant name and/or slug. Uses tenantId from environment variable."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Tenant Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"on hold\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}/status",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "tenant",
+                "{{tenantId}}",
+                "status"
+              ]
+            },
+            "description": "Change tenant status to 'active' or 'on hold'. Uses tenantId from environment variable."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Tenant",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Delete a tenant by ID. Uses tenantId from environment variable. Note: SUPER_TENANT cannot be deleted and will return a 403 Forbidden error."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Group Management",
+      "item": [
+        {
+          "name": "Create Group",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"groupId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Test Group\",\n  \"description\": \"This is a test group\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/group",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "group"
+              ]
+            },
+            "description": "Create a new group with tenantId, name, and optional description. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Groups",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/group",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "group"
+              ]
+            },
+            "description": "Get list of all groups with their tenant relationships. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Groups By Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/group?tenantId={{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "group"
+              ],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            },
+            "description": "Get all groups belonging to a specific tenant. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Group By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "group",
+                "{{groupId}}"
+              ]
+            },
+            "description": "Get a specific group by ID with its tenant relationship. Uses groupId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Group",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Group Name\",\n  \"description\": \"Updated description\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "group",
+                "{{groupId}}"
+              ]
+            },
+            "description": "Update group name and/or description. Uses groupId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Group",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/group/{{groupId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "group",
+                "{{groupId}}"
+              ]
+            },
+            "description": "Delete a group by ID. Uses groupId from environment variable. Requires authentication. Note: System groups (super_admin, admin, user) cannot be deleted and will return a 403 Forbidden error."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User-Group Management",
+      "item": [
+        {
+          "name": "Assign User to Group",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"userGroupId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"groupId\": \"{{groupId}}\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user-group",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user-group"
+              ]
+            },
+            "description": "Assign a user to a group. Creates a user-group relationship. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All User-Group Assignments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user-group",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user-group"
+              ]
+            },
+            "description": "Get all user-group assignments with user and group details. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Groups By User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user-group?userId={{userId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user-group"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userId}}"
+                }
+              ]
+            },
+            "description": "Get all groups that a specific user belongs to. Uses userId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users By Group",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user-group?groupId={{groupId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user-group"
+              ],
+              "query": [
+                {
+                  "key": "groupId",
+                  "value": "{{groupId}}"
+                }
+              ]
+            },
+            "description": "Get all users that belong to a specific group. Uses groupId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User-Group Assignment By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user-group/{{userGroupId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user-group",
+                "{{userGroupId}}"
+              ]
+            },
+            "description": "Get a specific user-group assignment by ID. Uses userGroupId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Remove User-Group Assignment By ID",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user-group/{{userGroupId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user-group",
+                "{{userGroupId}}"
+              ]
+            },
+            "description": "Remove a user-group assignment by assignment ID. Uses userGroupId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Remove User From Group",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user-group/user/{{userId}}/group/{{groupId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user-group",
+                "user",
+                "{{userId}}",
+                "group",
+                "{{groupId}}"
+              ]
+            },
+            "description": "Remove a user from a group by userId and groupId. Uses environment variables. Requires authentication."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "OpenAI Config Management",
+      "item": [
+        {
+          "name": "Get OpenAI Config by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/openai-config/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "openai-config",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{openai_config_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get OpenAI Config by Tenant ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/openai-config/tenant/:tenantId",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "openai-config",
+                "tenant",
+                ":tenantId"
+              ],
+              "variable": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenant_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update OpenAI Config",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assistantId\": \"asst_abc123\",\n  \"apiKey\": \"sk-proj-...\",\n  \"isEnabled\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/openai-config/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "openai-config",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{openai_config_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle OpenAI Config Enabled",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/openai-config/:id/toggle-enabled",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "openai-config",
+                ":id",
+                "toggle-enabled"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{openai_config_id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Hello World",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring"
+              ]
+            },
+            "description": "Basic health check endpoint"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.vivaguest.me/api/monitoring",
+      "type": "string"
+    }
+  ]
 }
