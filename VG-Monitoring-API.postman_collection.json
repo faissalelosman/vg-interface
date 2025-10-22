@@ -1084,6 +1084,110 @@
 			]
 		},
 		{
+			"name": "OpenAI Config Management",
+			"item": [
+				{
+					"name": "Get OpenAI Config By Tenant ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenantId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"open-ai",
+								"tenant",
+								"{{tenantId}}"
+							]
+						},
+						"description": "Get OpenAI configuration for a specific tenant. Uses tenantId from environment variable. Note: OpenAI config is automatically created if it doesn't exist."
+					},
+					"response": []
+				},
+				{
+					"name": "Update OpenAI Config By Tenant ID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"assistantId\": \"asst_123456789\",\n  \"apiKey\": \"sk-...\",\n  \"isEnabled\": true\n}"
+						},
+						"url": {
+							"raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenantId}}",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"open-ai",
+								"tenant",
+								"{{tenantId}}"
+							]
+						},
+						"description": "Update OpenAI configuration for a tenant. All fields are optional: assistantId, apiKey, isEnabled. Uses tenantId from environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle OpenAI Enabled Status By Tenant ID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://app.vivaguest.me/api/open-ai/tenant/{{tenantId}}/toggle-enabled",
+							"protocol": "https",
+							"host": [
+								"app",
+								"vivaguest",
+								"me"
+							],
+							"path": [
+								"api",
+								"open-ai",
+								"tenant",
+								"{{tenantId}}",
+								"toggle-enabled"
+							]
+						},
+						"description": "Toggle the isEnabled status of an OpenAI configuration for a tenant. Uses tenantId from environment variable."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Health Check",
 			"item": [
 				{
