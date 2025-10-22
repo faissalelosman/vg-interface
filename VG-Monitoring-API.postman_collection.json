@@ -938,40 +938,6 @@
       "name": "OpenAI Config Management",
       "item": [
         {
-          "name": "Get OpenAI Config by ID",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{access_token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/openai-config/:id",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "openai-config",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "{{openai_config_id}}"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "Get OpenAI Config by Tenant ID",
           "request": {
             "auth": {
