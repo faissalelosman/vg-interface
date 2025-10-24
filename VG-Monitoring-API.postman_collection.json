@@ -1586,7 +1586,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Custom Flow\",\n  \"description\": \"A custom conversation flow\",\n  \"contextSchema\": [\"guest_name\", \"check_in_date\", \"check_out_date\"]\n}"
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Custom Flow\",\n  \"description\": \"A custom conversation flow\"\n}"
             },
             "url": {
               "raw": "https://app.vivaguest.me/api/conversation-flow/conversation-flow",
@@ -1602,7 +1602,7 @@
                 "conversation-flow"
               ]
             },
-            "description": "Create a new conversation flow for a tenant. Required fields: tenantId, name. Optional: description, contextSchema. Automatically saves conversationFlowId to environment. Requires authentication."
+            "description": "Create a new conversation flow for a tenant. Required fields: tenantId, name. Optional: description. Automatically saves conversationFlowId to environment. Requires authentication."
           },
           "response": []
         },
@@ -1623,7 +1623,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Updated Flow Name\",\n  \"description\": \"Updated description\",\n  \"contextSchema\": [\"guest_name\", \"room_number\", \"special_requests\"]\n}"
+              "raw": "{\n  \"name\": \"Updated Flow Name\",\n  \"description\": \"Updated description\"\n}"
             },
             "url": {
               "raw": "https://app.vivaguest.me/api/conversation-flow/conversation-flow/{{conversationFlowId}}",
@@ -1640,7 +1640,7 @@
                 "{{conversationFlowId}}"
               ]
             },
-            "description": "Update a conversation flow. Can update name, description, and contextSchema. Uses conversationFlowId from environment variable. Requires authentication and tenant authorization."
+            "description": "Update a conversation flow. Can update name and description. Uses conversationFlowId from environment variable. Requires authentication and tenant authorization."
           },
           "response": []
         },
