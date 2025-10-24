@@ -1052,6 +1052,442 @@
       ]
     },
     {
+      "name": "WhatsApp Config Management",
+      "item": [
+        {
+          "name": "Get WhatsApp Config by Tenant ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/whatsapp/config/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "whatsapp",
+                "config",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Get WhatsApp configuration for a specific tenant. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Update WhatsApp Config",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"whatsappConfigId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumberId\": \"1234567890\",\n  \"apiToken\": \"your-whatsapp-api-token\",\n  \"webhookUrl\": \"https://your-webhook.com/webhook\",\n  \"webhookVerifyToken\": \"your-verify-token\",\n  \"isEnabled\": true\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/whatsapp/config/{{whatsappConfigId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "whatsapp",
+                "config",
+                "{{whatsappConfigId}}"
+              ]
+            },
+            "description": "Update WhatsApp configuration by config ID. Can update phoneNumberId, apiToken, webhookUrl, webhookVerifyToken, and isEnabled. Uses whatsappConfigId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle WhatsApp Config Enabled",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/whatsapp/config/{{whatsappConfigId}}/toggle-enabled",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "whatsapp",
+                "config",
+                "{{whatsappConfigId}}",
+                "toggle-enabled"
+              ]
+            },
+            "description": "Toggle the enabled/disabled state of WhatsApp configuration. Uses whatsappConfigId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Variable Management",
+      "item": [
+        {
+          "name": "Get All Variables by Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable?tenantId={{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable"
+              ],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            },
+            "description": "Get all variables for a specific tenant. Variables can be of type 'global', 'local', or 'context'. Default context variables include: guest_name, check_in_date, check_out_date, room_number, language. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Variable by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable",
+                "{{variableId}}"
+              ]
+            },
+            "description": "Get a specific variable by ID. Uses variableId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Variable",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"variableId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"custom_variable\",\n  \"type\": \"global\",\n  \"description\": \"A custom global variable\",\n  \"value\": \"default_value\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable"
+              ]
+            },
+            "description": "Create a new variable for a tenant. Choose between 'global' or 'local' as type. Global variables are available across all conversations, local variables are scoped to individual conversations. Required fields: tenantId, name, type. Optional: description, value. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Local Variable",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"variableId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"session_variable\",\n  \"type\": \"local\",\n  \"description\": \"A local conversation variable\",\n  \"value\": null\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable"
+              ]
+            },
+            "description": "Create a new local variable for a tenant. Local variables are scoped to individual conversations and not shared globally. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Variable (Global)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"updated_variable_name\",\n  \"description\": \"Updated description\",\n  \"value\": \"updated_value\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable",
+                "{{variableId}}"
+              ]
+            },
+            "description": "Update a global variable. Can update name, description, and value. The type field is immutable. Uses variableId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Variable Value Only",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"new_value\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable",
+                "{{variableId}}"
+              ]
+            },
+            "description": "Partially update a variable (typically just the value). Useful for quick value updates without changing name or description. Uses variableId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Variable (Global or Local)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable",
+                "{{variableId}}"
+              ]
+            },
+            "description": "Delete a variable by ID. Works for both global and local variables. Default context variables (guest_name, check_in_date, check_out_date, room_number, language) may be protected from deletion depending on business logic. Uses variableId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Variable by Tenant and Name",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/state-machine/variable/tenant/{{tenantId}}/name/:variableName",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "state-machine",
+                "variable",
+                "tenant",
+                "{{tenantId}}",
+                "name",
+                ":variableName"
+              ],
+              "variable": [
+                {
+                  "key": "variableName",
+                  "value": "custom_variable"
+                }
+              ]
+            },
+            "description": "Delete a variable by tenant ID and variable name. Alternative to deleting by ID. Works for both global and local variables. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Health Check",
       "item": [
         {
