@@ -1185,7 +1185,7 @@
               }
             ],
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable?tenantId={{tenantId}}",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable?tenantId={{tenantId}}",
               "protocol": "https",
               "host": [
                 "app",
@@ -1194,7 +1194,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable"
               ],
               "query": [
@@ -1220,7 +1220,7 @@
               }
             ],
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable/{{variableId}}",
               "protocol": "https",
               "host": [
                 "app",
@@ -1229,7 +1229,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable",
                 "{{variableId}}"
               ]
@@ -1272,7 +1272,7 @@
               "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"custom_variable\",\n  \"type\": \"global\",\n  \"description\": \"A custom global variable\",\n  \"value\": \"default_value\"\n}"
             },
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable",
               "protocol": "https",
               "host": [
                 "app",
@@ -1281,7 +1281,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable"
               ]
             },
@@ -1323,7 +1323,7 @@
               "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"session_variable\",\n  \"type\": \"local\",\n  \"description\": \"A local conversation variable\",\n  \"value\": null\n}"
             },
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable",
               "protocol": "https",
               "host": [
                 "app",
@@ -1332,7 +1332,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable"
               ]
             },
@@ -1360,7 +1360,7 @@
               "raw": "{\n  \"name\": \"updated_variable_name\",\n  \"description\": \"Updated description\",\n  \"value\": \"updated_value\"\n}"
             },
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable/{{variableId}}",
               "protocol": "https",
               "host": [
                 "app",
@@ -1369,7 +1369,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable",
                 "{{variableId}}"
               ]
@@ -1398,7 +1398,7 @@
               "raw": "{\n  \"value\": \"new_value\"\n}"
             },
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable/{{variableId}}",
               "protocol": "https",
               "host": [
                 "app",
@@ -1407,7 +1407,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable",
                 "{{variableId}}"
               ]
@@ -1428,7 +1428,7 @@
               }
             ],
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable/{{variableId}}",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable/{{variableId}}",
               "protocol": "https",
               "host": [
                 "app",
@@ -1437,7 +1437,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable",
                 "{{variableId}}"
               ]
@@ -1458,7 +1458,7 @@
               }
             ],
             "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/variable/tenant/{{tenantId}}/name/:variableName",
+              "raw": "https://app.vivaguest.me/api/conversation-flow/variable/tenant/{{tenantId}}/name/:variableName",
               "protocol": "https",
               "host": [
                 "app",
@@ -1467,7 +1467,7 @@
               ],
               "path": [
                 "api",
-                "state-machine",
+                "conversation-flow",
                 "variable",
                 "tenant",
                 "{{tenantId}}",
