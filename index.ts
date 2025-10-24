@@ -20,3 +20,7 @@ export * from './dto/whatsapp-config/update-whatsapp-config.dto';
 
 // OpenAI Config DTOs
 export * from './dto/openai-config/update-openai-config.dto';
+
+// Variable DTOs
+export * from './dto/variable/create-variable.dto';
+export * from './dto/variable/update-variable.dto';
