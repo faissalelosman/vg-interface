@@ -1488,6 +1488,242 @@
       ]
     },
     {
+      "name": "ConversationFlow Management",
+      "item": [
+        {
+          "name": "Get All ConversationFlows by Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow?tenantId={{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow"
+              ],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            },
+            "description": "Get all conversation flows for a specific tenant. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get ConversationFlow by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow/{{conversationFlowId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow",
+                "{{conversationFlowId}}"
+              ]
+            },
+            "description": "Get a specific conversation flow by ID. Uses conversationFlowId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Create ConversationFlow",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.uuid) {",
+                  "    pm.environment.set(\"conversationFlowId\", jsonData.uuid);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Custom Flow\",\n  \"description\": \"A custom conversation flow\",\n  \"contextSchema\": [\"guest_name\", \"check_in_date\", \"check_out_date\"]\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow"
+              ]
+            },
+            "description": "Create a new conversation flow for a tenant. Required fields: tenantId, name. Optional: description, contextSchema. Automatically saves conversationFlowId to environment. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Update ConversationFlow",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Flow Name\",\n  \"description\": \"Updated description\",\n  \"contextSchema\": [\"guest_name\", \"room_number\", \"special_requests\"]\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow/{{conversationFlowId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow",
+                "{{conversationFlowId}}"
+              ]
+            },
+            "description": "Update a conversation flow. Can update name, description, and contextSchema. Uses conversationFlowId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Clone ConversationFlow",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.uuid) {",
+                  "    pm.environment.set(\"conversationFlowId\", jsonData.uuid);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cloned Flow\",\n  \"description\": \"Cloned from original flow\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow/{{conversationFlowId}}/clone",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow",
+                "{{conversationFlowId}}",
+                "clone"
+              ]
+            },
+            "description": "Clone an existing conversation flow. Creates a copy with the same contextSchema but new name and description. The cloned flow belongs to the same tenant as the original. Automatically saves the new conversationFlowId to environment. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete ConversationFlow",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow/{{conversationFlowId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow",
+                "{{conversationFlowId}}"
+              ]
+            },
+            "description": "Delete a conversation flow by ID. Uses conversationFlowId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Health Check",
       "item": [
         {

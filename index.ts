@@ -24,3 +24,7 @@ export * from './dto/openai-config/update-openai-config.dto';
 // Variable DTOs
 export * from './dto/variable/create-variable.dto';
 export * from './dto/variable/update-variable.dto';
+
+// ConversationFlow DTOs
+export * from './dto/conversation-flow/create-conversation-flow.dto';
+export * from './dto/conversation-flow/update-conversation-flow.dto';
