@@ -29,3 +29,6 @@ export * from './dto/variable/update-variable.dto';
 export * from './dto/conversation-flow/create-conversation-flow.dto';
 export * from './dto/conversation-flow/update-conversation-flow.dto';
 export * from './dto/conversation-flow/update-conversation-flow-config.dto';
+
+// Teams Config DTOs
+export * from './dto/teams-config/update-teams-config.dto';
