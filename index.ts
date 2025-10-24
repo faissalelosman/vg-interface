@@ -28,3 +28,4 @@ export * from './dto/variable/update-variable.dto';
 // ConversationFlow DTOs
 export * from './dto/conversation-flow/create-conversation-flow.dto';
 export * from './dto/conversation-flow/update-conversation-flow.dto';
+export * from './dto/conversation-flow/update-conversation-flow-config.dto';

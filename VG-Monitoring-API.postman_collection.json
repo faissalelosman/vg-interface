@@ -1730,6 +1730,81 @@
       ]
     },
     {
+      "name": "ConversationFlow Config Management",
+      "item": [
+        {
+          "name": "Get ConversationFlow Config by Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow/config/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow",
+                "config",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Get conversation flow configuration for a tenant including timer value, template, templateId, and active conversation flow. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Update ConversationFlow Config",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activeConversationFlowId\": \"{{conversationFlowId}}\",\n  \"timerValue\": 300,\n  \"template\": \"Welcome message template\",\n  \"templateId\": \"template_123\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/conversation-flow/config/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "conversation-flow",
+                "config",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Update conversation flow configuration for a tenant. Can update activeConversationFlowId (which conversation flow to use), timerValue (in seconds), template (message template), and templateId. All fields are optional. Uses tenantId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Health Check",
       "item": [
         {
