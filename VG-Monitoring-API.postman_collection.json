@@ -1292,6 +1292,157 @@
       ]
     },
     {
+      "name": "Agent Management",
+      "item": [
+        {
+          "name": "Get All Agents by Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/agent?tenantId={{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "agent"
+              ],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            },
+            "description": "Get all agents for a specific tenant including their status (active, inactive, busy, offline). Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Agent by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/agent/{{agentId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "agent",
+                "{{agentId}}"
+              ]
+            },
+            "description": "Get a specific agent by ID including status. Uses agentId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Agent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"agentId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Agent Name\",\n  \"email\": \"agent@example.com\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/agent",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "agent"
+              ]
+            },
+            "description": "Create a new agent for a tenant. Required fields: tenantId, name, email. Status is automatically set to 'active' by the backend. Automatically saves agentId to environment. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Agent",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/agent/{{agentId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "agent",
+                "{{agentId}}"
+              ]
+            },
+            "description": "Delete an agent by ID. Uses agentId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Variable Management",
       "item": [
         {
