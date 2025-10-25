@@ -33,6 +33,9 @@ export * from './dto/conversation-flow/update-conversation-flow-config.dto';
 // Teams Config DTOs
 export * from './dto/teams-config/update-teams-config.dto';
 
+// Slack Config DTOs
+export * from './dto/slack-config/update-slack-config.dto';
+
 // Agent DTOs
 export * from './dto/agent/create-agent.dto';
 

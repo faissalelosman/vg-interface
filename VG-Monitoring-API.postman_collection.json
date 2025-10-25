@@ -1292,6 +1292,127 @@
       ]
     },
     {
+      "name": "Slack Config Management",
+      "item": [
+        {
+          "name": "Get Slack Config by Tenant ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/slack/config/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "slack",
+                "config",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Get Slack configuration for a specific tenant. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Slack Config",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"slackConfigId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"your-slack-client-id\",\n  \"clientSecret\": \"your-slack-client-secret\",\n  \"signingSecret\": \"your-slack-signing-secret\",\n  \"isEnabled\": true\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/slack/config/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "slack",
+                "config",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Update Slack configuration. Can update clientId, clientSecret, signingSecret, and isEnabled. Uses tenantId from environment variable. Automatically saves slackConfigId to environment. Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Slack Config Enabled",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/slack/config/tenant/{{tenantId}}/toggle-enabled",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "slack",
+                "config",
+                "tenant",
+                "{{tenantId}}",
+                "toggle-enabled"
+              ]
+            },
+            "description": "Toggle the enabled/disabled state of Slack configuration. Uses tenantId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Agent Management",
       "item": [
         {
