@@ -1497,6 +1497,38 @@
             "description": "Update handover configuration for agent management. Can update groupName, maxConversationsPerAgent, message templates, feedback settings, and isEnabled. Uses tenantId from environment variable. Automatically saves handoverConfigId to environment. Requires authentication and tenant authorization."
           },
           "response": []
+        },
+        {
+          "name": "Toggle Handover Config Enabled",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/handover/config/tenant/{{tenantId}}/toggle-enabled",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "handover",
+                "config",
+                "tenant",
+                "{{tenantId}}",
+                "toggle-enabled"
+              ]
+            },
+            "description": "Toggle the enabled/disabled state of handover configuration. Uses tenantId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
         }
       ]
     },
