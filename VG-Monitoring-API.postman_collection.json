@@ -1443,6 +1443,64 @@
       ]
     },
     {
+      "name": "Handover Config Management",
+      "item": [
+        {
+          "name": "Update Handover Config",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"handoverConfigId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupName\": \"Concierge Team\",\n  \"maxConversationsPerAgent\": 3,\n  \"waitingListMessage\": \"You're in the queue. An agent will be with you shortly.\",\n  \"connectedMessage\": \"You're now connected with {agent_name}. How can I help you?\",\n  \"noAgentsAvailableMessage\": \"All agents are currently busy. Please try again later.\",\n  \"agentJoinedMessage\": \"{agent_name} has joined the conversation\",\n  \"requireFeedback\": true,\n  \"feedbackMessage\": \"How would you rate your experience?\",\n  \"requireWrittenFeedback\": false,\n  \"writtenFeedbackMessage\": \"Please tell us more about your experience\",\n  \"showConversationHistory\": false,\n  \"isEnabled\": true\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/handover/config/tenant/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "handover",
+                "config",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Update handover configuration for agent management. Can update groupName, maxConversationsPerAgent, message templates, feedback settings, and isEnabled. Uses tenantId from environment variable. Automatically saves handoverConfigId to environment. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Variable Management",
       "item": [
         {

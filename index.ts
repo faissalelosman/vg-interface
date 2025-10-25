@@ -35,3 +35,6 @@ export * from './dto/teams-config/update-teams-config.dto';
 
 // Agent DTOs
 export * from './dto/agent/create-agent.dto';
+
+// Handover Config DTOs
+export * from './dto/handover-config/update-handover-config.dto';
