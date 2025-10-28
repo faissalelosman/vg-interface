@@ -8,6 +8,11 @@ export class UpdateWhatsappConfigDto {
 
   @IsString()
   @IsOptional()
+  @MaxLength(20)
+  phoneNumber?: string;
+
+  @IsString()
+  @IsOptional()
   @MaxLength(255)
   whatsappAccountId?: string;
 
