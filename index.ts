@@ -41,3 +41,8 @@ export * from './dto/agent/create-agent.dto';
 
 // Handover Config DTOs
 export * from './dto/handover-config/update-handover-config.dto';
+
+// Conversation DTOs
+export * from './dto/conversation/create-conversation.dto';
+export * from './dto/conversation/create-conversations-bulk.dto';
+export * from './dto/conversation/update-conversation.dto';
