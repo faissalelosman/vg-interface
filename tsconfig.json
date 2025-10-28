@@ -13,6 +13,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["dto/**/*"],
+  "include": ["dto/**/*", "index.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,4 +1,10 @@
-import { IsOptional, IsString, IsEmail, MaxLength, IsDateString } from 'class-validator';
+import { IsOptional, IsString, IsEmail, MaxLength, IsDateString, IsEnum } from 'class-validator';
+
+export enum ConversationStatus {
+  NEW = 'new',
+  CHECKED_IN = 'checked-in',
+  ARCHIVED = 'archived',
+}
 
 export class UpdateConversationDto {
   @IsOptional()
@@ -33,4 +39,8 @@ export class UpdateConversationDto {
   @IsOptional()
   @IsDateString()
   checkoutDate?: string;
+
+  @IsOptional()
+  @IsEnum(ConversationStatus)
+  status?: ConversationStatus;
 }
