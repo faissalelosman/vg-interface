@@ -2417,6 +2417,35 @@
           "response": []
         },
         {
+          "name": "Get All Conversations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/conversations",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "conversations"
+              ]
+            },
+            "description": "Get all conversations for the tenant. Tenant ID is extracted from JWT token. Requires authentication."
+          },
+          "response": []
+        },
+        {
           "name": "Delete Conversation",
           "request": {
             "method": "DELETE",
