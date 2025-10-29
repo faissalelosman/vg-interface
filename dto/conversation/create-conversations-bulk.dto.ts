@@ -1,10 +1,6 @@
-import { IsArray, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
-import { CreateConversationDto } from './create-conversation.dto';
+import { IsArray } from 'class-validator';
 
 export class CreateConversationsBulkDto {
   @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateConversationDto)
-  conversations: CreateConversationDto[];
+  conversations: any[];
 }
