@@ -1086,6 +1086,37 @@
           "response": []
         },
         {
+          "name": "Get Super Tenant Phone Number",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/whatsapp/config/super-tenant/phone-number",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "whatsapp",
+                "config",
+                "super-tenant",
+                "phone-number"
+              ]
+            },
+            "description": "Get the WhatsApp phone number configured for the super tenant. Requires authentication."
+          },
+          "response": []
+        },
+        {
           "name": "Update WhatsApp Config",
           "event": [
             {
