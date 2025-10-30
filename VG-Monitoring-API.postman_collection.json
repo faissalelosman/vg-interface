@@ -2509,6 +2509,196 @@
       ]
     },
     {
+      "name": "Campaign Management",
+      "item": [
+        {
+          "name": "Create Campaign",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.environment.set(\"campaignId\", jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Summer Sale Campaign\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/campaign",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "campaign"
+              ]
+            },
+            "description": "Create a new campaign. Required fields: tenantId, name. Automatically saves campaignId to environment. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Campaigns",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/campaign?tenantId={{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "campaign"
+              ],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            },
+            "description": "Get all campaigns for a specific tenant. Uses tenantId from environment variable. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Campaign",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"TEMPLATE\",\n  \"body\": \"Check out our amazing summer deals!\",\n  \"template\": \"summer_promo\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/campaign/{{campaignId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "campaign",
+                "{{campaignId}}"
+              ]
+            },
+            "description": "Update a campaign. Can update type, body, and template. Name cannot be updated. Uses campaignId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Play Campaign",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/campaign/{{campaignId}}/play",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "campaign",
+                "{{campaignId}}",
+                "play"
+              ]
+            },
+            "description": "Execute/play a campaign to send it to recipients. Uses campaignId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Campaign",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/campaign/{{campaignId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "campaign",
+                "{{campaignId}}"
+              ]
+            },
+            "description": "Delete a campaign by ID. Uses campaignId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Health Check",
       "item": [
         {

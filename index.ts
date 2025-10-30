@@ -46,3 +46,7 @@ export * from './dto/handover-config/update-handover-config.dto';
 export * from './dto/conversation/create-conversation.dto';
 export * from './dto/conversation/create-conversations-bulk.dto';
 export * from './dto/conversation/update-conversation.dto';
+
+// Campaign DTOs
+export * from './dto/campaign/create-campaign.dto';
+export * from './dto/campaign/update-campaign.dto';
