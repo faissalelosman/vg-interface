@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsUUID, MaxLength } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional, IsString, IsUUID, MaxLength } from 'class-validator';
 
 export class CreateCampaignDto {
   @IsNotEmpty()
@@ -9,4 +9,14 @@ export class CreateCampaignDto {
   @IsString()
   @MaxLength(30)
   name: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @IsIn(['TEMPLATE', 'MESSAGE'])
+  type?: string;
+  
+  @IsOptional()
+  @IsString()
+  @MaxLength(30)
+  template?: string;
 }

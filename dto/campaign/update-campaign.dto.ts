@@ -1,17 +1,7 @@
-import { IsOptional, IsString, IsIn, MaxLength } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class UpdateCampaignDto {
-  @IsOptional()
-  @IsString()
-  @IsIn(['TEMPLATE', 'MESSAGE'])
-  type?: string;
-
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   body?: string;
-
-  @IsOptional()
-  @IsString()
-  @MaxLength(30)
-  template?: string;
 }

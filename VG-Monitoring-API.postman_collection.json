@@ -2542,7 +2542,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Summer Sale Campaign\"\n}"
+              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Summer Sale Campaign\",\n  \"type\": \"TEMPLATE\",\n  \"template\": \"summer_promo\"\n}"
             },
             "url": {
               "raw": "https://app.vivaguest.me/api/webhook/campaign",
@@ -2558,7 +2558,7 @@
                 "campaign"
               ]
             },
-            "description": "Create a new campaign. Required fields: tenantId, name. Automatically saves campaignId to environment. Requires authentication."
+            "description": "Create a new campaign. Required fields: tenantId, name, type (TEMPLATE or MESSAGE). Optional: template. Automatically saves campaignId to environment. Requires authentication."
           },
           "response": []
         },
@@ -2614,7 +2614,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"type\": \"TEMPLATE\",\n  \"body\": \"Check out our amazing summer deals!\",\n  \"template\": \"summer_promo\"\n}"
+              "raw": "{\n  \"body\": \"Check out our amazing summer deals!\"\n}"
             },
             "url": {
               "raw": "https://app.vivaguest.me/api/webhook/campaign/{{campaignId}}",
@@ -2631,7 +2631,7 @@
                 "{{campaignId}}"
               ]
             },
-            "description": "Update a campaign. Can update type, body, and template. Name cannot be updated. Uses campaignId from environment variable. Requires authentication and tenant authorization."
+            "description": "Update a campaign. Required field: body. Name, type, and template cannot be updated. Uses campaignId from environment variable. Requires authentication and tenant authorization."
           },
           "response": []
         },
