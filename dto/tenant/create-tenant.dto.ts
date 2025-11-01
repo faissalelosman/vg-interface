@@ -32,17 +32,17 @@ export class CreateTenantDto {
   @IsOptional()
   @IsString()
   @IsIn(['MS Teams', 'Slack'])
-  gateway_type?: string;
+  gatewayType?: string;
 
   @IsOptional()
   @IsBoolean()
-  reservation_import_enabled?: boolean;
+  reservationImportEnabled?: boolean;
 
   @IsOptional()
   @IsBoolean()
-  guest_feedback_enabled?: boolean;
+  guestFeedbackEnabled?: boolean;
 
   @IsOptional()
   @IsBoolean()
-  ai_enabled?: boolean;
+  aiEnabled?: boolean;
 }
