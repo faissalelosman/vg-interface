@@ -50,6 +50,3 @@ export * from './dto/conversation/update-conversation.dto';
 // Campaign DTOs
 export * from './dto/campaign/create-campaign.dto';
 export * from './dto/campaign/update-campaign.dto';
-
-// Message DTOs
-export * from './dto/message/whatsapp-message.dto';
