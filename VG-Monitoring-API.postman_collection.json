@@ -2699,50 +2699,6 @@
       ]
     },
     {
-      "name": "Internal - State Machine",
-      "item": [
-        {
-          "name": "Send WhatsApp Message to Conversation",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{accessToken}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"message\": \"Hello from WhatsApp\",\n  \"mediaUrl\": \"https://example.com/media/image.jpg\",\n  \"mediaType\": \"image\"\n}"
-            },
-            "url": {
-              "raw": "https://app.vivaguest.me/api/state-machine/conversation/{{conversationId}}/message",
-              "protocol": "https",
-              "host": [
-                "app",
-                "vivaguest",
-                "me"
-              ],
-              "path": [
-                "api",
-                "state-machine",
-                "conversation",
-                "{{conversationId}}",
-                "message"
-              ]
-            },
-            "description": "Internal endpoint for WhatsApp to send messages to state-machine. Required fields: message (string). Optional fields: mediaUrl (string), mediaType (string - image/video/audio/document). Uses conversationId from environment variable. Requires authentication."
-          },
-          "response": []
-        }
-      ]
-    },
-    {
       "name": "Health Check",
       "item": [
         {
