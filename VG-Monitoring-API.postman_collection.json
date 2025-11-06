@@ -2699,6 +2699,41 @@
       ]
     },
     {
+      "name": "Feedback Management",
+      "item": [
+        {
+          "name": "Get All Feedback by Tenant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/feedback/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "feedback",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Get all feedback for a specific tenant. Returns feedback with guest information (name, phone, email), topic, content, and variables. Uses tenantId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Health Check",
       "item": [
         {
