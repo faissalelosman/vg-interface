@@ -1198,6 +1198,36 @@
             "description": "Toggle the enabled/disabled state of WhatsApp configuration. Uses whatsappConfigId from environment variable. Requires authentication and tenant authorization."
           },
           "response": []
+        },
+        {
+          "name": "Get All WhatsApp Templates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/whatsapp/templates/{{tenantId}}",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "whatsapp",
+                "templates",
+                "{{tenantId}}"
+              ]
+            },
+            "description": "Get all WhatsApp templates for a specific tenant. Returns list of available message templates from WhatsApp Business API. Uses tenantId from environment variable. Requires authentication and tenant authorization."
+          },
+          "response": []
         }
       ]
     },
