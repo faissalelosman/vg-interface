@@ -1470,6 +1470,38 @@
             "description": "Toggle the enabled/disabled state of Slack configuration. Uses tenantId from environment variable. Requires authentication and tenant authorization."
           },
           "response": []
+        },
+        {
+          "name": "Slack Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"6Ex3LKsjxcGbJ1pP58PG6tU3\",\n  \"challenge\": \"5N3zewVlNcNG1bxwWkoWeMf5vlfQG9Hpph2yLA3evtApvTBKzpE6\",\n  \"type\": \"url_verification\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/slack/webhook",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "slack",
+                "webhook"
+              ]
+            },
+            "description": "Slack webhook endpoint for receiving events from Slack. This endpoint handles URL verification challenges and Slack event callbacks. When setting up a webhook in Slack, this is the URL you should configure. The endpoint returns the challenge parameter for URL verification."
+          },
+          "response": []
         }
       ]
     },
