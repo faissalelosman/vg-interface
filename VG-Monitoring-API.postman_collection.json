@@ -1544,9 +1544,9 @@
           "response": []
         },
         {
-          "name": "Get Agent by ID",
+          "name": "Accept Agent",
           "request": {
-            "method": "GET",
+            "method": "POST",
             "header": [
               {
                 "key": "Authorization",
@@ -1555,7 +1555,7 @@
               }
             ],
             "url": {
-              "raw": "https://app.vivaguest.me/api/handover/agent/{{agentId}}",
+              "raw": "https://app.vivaguest.me/api/handover/agent/{{agentId}}/accept",
               "protocol": "https",
               "host": [
                 "app",
@@ -1566,61 +1566,11 @@
                 "api",
                 "handover",
                 "agent",
-                "{{agentId}}"
+                "{{agentId}}",
+                "accept"
               ]
             },
-            "description": "Get a specific agent by ID including status. Uses agentId from environment variable. Requires authentication."
-          },
-          "response": []
-        },
-        {
-          "name": "Create Agent",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "var jsonData = pm.response.json();",
-                  "if (jsonData.id) {",
-                  "    pm.environment.set(\"agentId\", jsonData.id);",
-                  "}"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{accessToken}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"tenantId\": \"{{tenantId}}\",\n  \"name\": \"Agent Name\",\n  \"email\": \"agent@example.com\"\n}"
-            },
-            "url": {
-              "raw": "https://app.vivaguest.me/api/handover/agent",
-              "protocol": "https",
-              "host": [
-                "app",
-                "vivaguest",
-                "me"
-              ],
-              "path": [
-                "api",
-                "handover",
-                "agent"
-              ]
-            },
-            "description": "Create a new agent for a tenant. Required fields: tenantId, name, email. Status is automatically set to 'active' by the backend. Automatically saves agentId to environment. Requires authentication."
+            "description": "Accept an agent for handover. The agentId is passed in the URL. Uses agentId from environment variable. Requires authentication and tenant authorization."
           },
           "response": []
         },

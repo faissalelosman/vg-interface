@@ -37,9 +37,6 @@ export * from './dto/teams-config/update-teams-config.dto';
 export * from './dto/slack-config/update-slack-config.dto';
 export * from './dto/slack-config/slack-webhook.dto';
 
-// Agent DTOs
-export * from './dto/agent/create-agent.dto';
-
 // Handover Config DTOs
 export * from './dto/handover-config/update-handover-config.dto';
 
