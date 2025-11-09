@@ -4,15 +4,11 @@ export class UpdateSlackConfigDto {
   @IsOptional()
   @IsString()
   @MaxLength(255)
-  clientId?: string;
+  teamId?: string;
 
   @IsOptional()
   @IsString()
-  clientSecret?: string;
-
-  @IsOptional()
-  @IsString()
-  signingSecret?: string;
+  botToken?: string;
 
   @IsOptional()
   @IsBoolean()

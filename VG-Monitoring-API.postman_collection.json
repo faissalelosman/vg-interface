@@ -1417,7 +1417,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"clientId\": \"your-slack-client-id\",\n  \"clientSecret\": \"your-slack-client-secret\",\n  \"signingSecret\": \"your-slack-signing-secret\",\n  \"isEnabled\": true\n}"
+              "raw": "{\n  \"teamId\": \"T01234ABCDE\",\n  \"botToken\": \"xoxb-your-bot-token\",\n  \"isEnabled\": true\n}"
             },
             "url": {
               "raw": "https://app.vivaguest.me/api/slack/config/tenant/{{tenantId}}",
@@ -1435,7 +1435,7 @@
                 "{{tenantId}}"
               ]
             },
-            "description": "Update Slack configuration. Can update clientId, clientSecret, signingSecret, and isEnabled. Uses tenantId from environment variable. Automatically saves slackConfigId to environment. Requires authentication and tenant authorization."
+            "description": "Update Slack configuration. Can update teamId, botToken, and isEnabled. Uses tenantId from environment variable. Automatically saves slackConfigId to environment. Requires authentication and tenant authorization."
           },
           "response": []
         },
