@@ -3,6 +3,7 @@ import { IsOptional, IsString, IsEmail, MaxLength, IsDateString, IsEnum } from '
 export enum ConversationStatus {
   NEW = 'new',
   CHECKED_IN = 'checked-in',
+  CHECKED_OUT = 'checked-out',
   ARCHIVED = 'archived',
 }
 
