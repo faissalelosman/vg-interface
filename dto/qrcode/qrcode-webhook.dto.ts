@@ -4,4 +4,12 @@ export class QrcodeWebhookDto {
   @IsString()
   @IsNotEmpty()
   data: string;
+
+  @IsString()
+  @IsNotEmpty()
+  locationId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  locationName: string;
 }

@@ -1516,11 +1516,16 @@
               {
                 "key": "Content-Type",
                 "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{qrWebhookToken}}",
+                "type": "text"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"data\": \"scanned-qr-code-data-here\"\n}"
+              "raw": "{\n  \"data\": \"scanned-qr-code-data-here\",\n  \"locationId\": \"group-uuid-here\",\n  \"locationName\": \"Reception Desk\"\n}"
             },
             "url": {
               "raw": "https://app.vivaguest.me/api/webhook/qr",
@@ -1536,7 +1541,7 @@
                 "qr"
               ]
             },
-            "description": "Webhook endpoint for receiving QR code scan data from the QR code application. Accepts a JSON payload with a 'data' field containing the scanned QR code information."
+            "description": "Webhook endpoint for receiving QR code scan data from the QR code application. Requires Bearer token authentication. Accepts a JSON payload with: 'data' (scanned QR code information), 'locationId' (group/location UUID), and 'locationName' (name of the group/location)."
           },
           "response": []
         }
