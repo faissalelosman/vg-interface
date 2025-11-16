@@ -37,6 +37,9 @@ export * from './dto/teams-config/update-teams-config.dto';
 export * from './dto/slack-config/update-slack-config.dto';
 export * from './dto/slack-config/slack-webhook.dto';
 
+// QR Code DTOs
+export * from './dto/qrcode/qrcode-webhook.dto';
+
 // Handover Config DTOs
 export * from './dto/handover-config/update-handover-config.dto';
 

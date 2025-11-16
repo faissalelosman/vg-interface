@@ -1506,6 +1506,43 @@
       ]
     },
     {
+      "name": "QR Code Webhook",
+      "item": [
+        {
+          "name": "QR Code Scan Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"scanned-qr-code-data-here\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/qr",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "qr"
+              ]
+            },
+            "description": "Webhook endpoint for receiving QR code scan data from the QR code application. Accepts a JSON payload with a 'data' field containing the scanned QR code information."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Agent Management",
       "item": [
         {
