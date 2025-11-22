@@ -8,6 +8,11 @@ export class UpdateOpenaiConfigDto {
 
   @IsString()
   @IsOptional()
+  @MaxLength(255)
+  interpretationAssistantId?: string;
+
+  @IsString()
+  @IsOptional()
   apiKey?: string;
 
   @IsBoolean()

@@ -993,7 +993,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"assistantId\": \"asst_abc123\",\n  \"apiKey\": \"sk-proj-...\",\n  \"isEnabled\": true\n}"
+              "raw": "{\n  \"assistantId\": \"asst_abc123\",\n  \"interpretationAssistantId\": \"asst_xyz789\",\n  \"apiKey\": \"sk-proj-...\",\n  \"isEnabled\": true\n}"
             },
             "url": {
               "raw": "https://app.vivaguest.me/api/open-ai/config/tenant/{{tenant_id}}",
