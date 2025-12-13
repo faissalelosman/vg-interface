@@ -1509,6 +1509,35 @@
       "name": "QR Code Webhook",
       "item": [
         {
+          "name": "Get All QR Codes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/webhook/qr",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "webhook",
+                "qr"
+              ]
+            },
+            "description": "Fetch all QR codes available for the authenticated user. Returns a list of QR codes with their name, group, and description. Requires Bearer token authentication."
+          },
+          "response": []
+        },
+        {
           "name": "QR Code Scan Webhook",
           "request": {
             "method": "POST",
