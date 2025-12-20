@@ -54,3 +54,6 @@ export * from './dto/conversation/update-conversation.dto';
 // Campaign DTOs
 export * from './dto/campaign/create-campaign.dto';
 export * from './dto/campaign/update-campaign.dto';
+
+// Dashboard DTOs
+export * from './dto/dashboard/dashboard-response.dto';

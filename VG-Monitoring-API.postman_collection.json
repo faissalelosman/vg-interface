@@ -2916,6 +2916,52 @@
       ]
     },
     {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/dashboard?startDate=2025-12-13&endDate=2025-12-20",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "dashboard"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2025-12-13",
+                  "description": "Start date for analytics (YYYY-MM-DD format)"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2025-12-20",
+                  "description": "End date for analytics (YYYY-MM-DD format)"
+                }
+              ]
+            },
+            "description": "Get dashboard monitoring data including metrics and analytics. Returns: openConversations (count of open conversations), conversationsWithAgent (count of conversations currently with an agent), activeAgents (count of active agents), conversationsWaitingForAgent (count of conversations waiting for an agent), conversationsOverTime (bar chart data by day), meanCommunicationTimeMinutes (average guest-agent interaction time). Requires authentication. Date range is required for filtering analytics data."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Health Check",
       "item": [
         {
