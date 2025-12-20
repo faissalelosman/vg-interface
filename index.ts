@@ -1,6 +1,9 @@
 // User DTOs
 export * from './dto/user/create-user.dto';
 export * from './dto/user/login.dto';
+export * from './dto/user/send-password-reset.dto';
+export * from './dto/user/check-password-status.dto';
+export * from './dto/user/set-password.dto';
 
 // Tenant DTOs
 export * from './dto/tenant/create-tenant.dto';
