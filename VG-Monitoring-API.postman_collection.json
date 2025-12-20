@@ -243,6 +243,105 @@
             "description": "Delete a user by ID. Uses userId from environment variable. Requires authentication. Note: Superadmin users (users belonging to SUPER_TENANT) cannot be deleted and will return a 403 Forbidden error."
           },
           "response": []
+        },
+        {
+          "name": "Send Password Reset Link",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/send-password-reset",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "send-password-reset"
+              ]
+            },
+            "description": "Sends a password reset link to the user's email address. Required fields: email (string, valid email format). No authentication required."
+          },
+          "response": []
+        },
+        {
+          "name": "Check Password Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{resetToken}}\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/check-password-status",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "check-password-status"
+              ]
+            },
+            "description": "Checks if the user needs to set a password. Required fields: token (string, JWT token from reset link). Returns { requiresPasswordReset: boolean, email: string }. No authentication required."
+          },
+          "response": []
+        },
+        {
+          "name": "Set Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{resetToken}}\",\n  \"password\": \"newSecurePassword123\"\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/user/set-password",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "user",
+                "set-password"
+              ]
+            },
+            "description": "Sets a new password for the user. Required fields: token (string, JWT token from reset link), password (string, minimum 6 characters). No authentication required."
+          },
+          "response": []
         }
       ]
     },
@@ -2848,6 +2947,11 @@
     {
       "key": "base_url",
       "value": "https://app.vivaguest.me/api/monitoring",
+      "type": "string"
+    },
+    {
+      "key": "resetToken",
+      "value": "",
       "type": "string"
     }
   ]
