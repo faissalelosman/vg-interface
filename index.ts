@@ -57,3 +57,6 @@ export * from './dto/campaign/update-campaign.dto';
 
 // Dashboard DTOs
 export * from './dto/dashboard/dashboard-response.dto';
+
+// Guest DTOs
+export * from './dto/guest/guest-response.dto';

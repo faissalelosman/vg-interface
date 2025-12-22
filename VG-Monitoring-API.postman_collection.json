@@ -2962,6 +2962,40 @@
       ]
     },
     {
+      "name": "Guest Management",
+      "item": [
+        {
+          "name": "Get All Guests",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/monitoring/guest",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "monitoring",
+                "guest"
+              ]
+            },
+            "description": "Get all guests for the authenticated user's tenant. Returns a list of guests with their name, email, phone number, and all their stays (check-in/check-out date ranges). Guests are grouped by phone number with multiple stays aggregated. Requires authentication."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Health Check",
       "item": [
         {
