@@ -1147,6 +1147,87 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Get Knowledge Base",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://app.vivaguest.me/api/open-ai/config/tenant/{{tenant_id}}/knowledge-base",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "open-ai",
+                "config",
+                "tenant",
+                "{{tenant_id}}",
+                "knowledge-base"
+              ]
+            },
+            "description": "Fetch the knowledge base JSON from the OpenAI assistant's vector store. Returns the knowledge base content that is used by the assistant for RAG (Retrieval-Augmented Generation). Requires authentication and tenant authorization."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Knowledge Base",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"knowledgeBase\": {\n    \"hotel_info\": {\n      \"name\": \"Grand Hotel\",\n      \"address\": \"123 Main Street\",\n      \"phone\": \"+1234567890\"\n    },\n    \"amenities\": [\n      {\n        \"name\": \"Pool\",\n        \"hours\": \"6:00 AM - 10:00 PM\",\n        \"location\": \"Ground Floor\"\n      },\n      {\n        \"name\": \"Gym\",\n        \"hours\": \"24/7\",\n        \"location\": \"2nd Floor\"\n      }\n    ],\n    \"faqs\": [\n      {\n        \"question\": \"What is the check-in time?\",\n        \"answer\": \"Check-in is at 3:00 PM\"\n      },\n      {\n        \"question\": \"What is the check-out time?\",\n        \"answer\": \"Check-out is at 11:00 AM\"\n      }\n    ]\n  }\n}"
+            },
+            "url": {
+              "raw": "https://app.vivaguest.me/api/open-ai/config/tenant/{{tenant_id}}/knowledge-base",
+              "protocol": "https",
+              "host": [
+                "app",
+                "vivaguest",
+                "me"
+              ],
+              "path": [
+                "api",
+                "open-ai",
+                "config",
+                "tenant",
+                "{{tenant_id}}",
+                "knowledge-base"
+              ]
+            },
+            "description": "Update the knowledge base JSON for the OpenAI assistant. The knowledge base is uploaded as a JSON file to the assistant's vector store for RAG (Retrieval-Augmented Generation). This replaces any existing knowledge base content. Requires authentication and tenant authorization."
+          },
+          "response": []
         }
       ]
     },
