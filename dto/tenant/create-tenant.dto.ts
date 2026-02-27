@@ -37,7 +37,7 @@ export class CreateTenantDto {
   @IsNotEmpty()
   @IsString()
   @IsIn(['HOTEL', 'EVENT', 'COMMUNITY', 'CUSTOMER_INQUIRY'])
-  businessType: string;
+  type: string;
 
   @IsOptional()
   @IsBoolean()
