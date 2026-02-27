@@ -34,6 +34,11 @@ export class CreateTenantDto {
   @IsIn(['MS Teams', 'Slack'])
   gatewayType?: string;
 
+  @IsNotEmpty()
+  @IsString()
+  @IsIn(['HOTEL', 'EVENT', 'COMMUNITY', 'CUSTOMER_INQUIRY'])
+  businessType: string;
+
   @IsOptional()
   @IsBoolean()
   reservationImportEnabled?: boolean;
